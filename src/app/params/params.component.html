@@ -1,0 +1,23 @@
+<!-- <Page actionBarHidden="true" loaded="onPageLoaded"> -->
+<ActionBar>
+    <StackLayout><Label text="Sélectionnez l'atelier à attacher" class="entete up"></Label></StackLayout>
+</ActionBar>
+<GridLayout rows="*, 120">
+
+    <StackLayout row="0">
+        <ListView [items]="ateliers" (itemTap)="onItemTap($event)" class="list-group">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                <StackLayout>
+                    <Label [text]="item" class="list-group-item up"></Label>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>
+
+    <StackLayout row="1">
+        <Label [text]="'Atelier choisi : ' + choix" class="h2 up"></Label>
+        <Image src="res://valide" stretch="aspectFit" (tap)="onTap($event)" class="h2"></Image>
+    </StackLayout>
+</GridLayout>
+<!-- </Page> -->
