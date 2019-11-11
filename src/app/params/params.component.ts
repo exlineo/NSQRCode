@@ -28,7 +28,7 @@ export class ParamsComponent implements OnInit {
     onTap(args: EventData) {
         if(this.choix.length > 0){
             console.log('Validé');
-            this.route.navigate(['/']);
+            this.route.navigate(['/home']);
         }
     }
 }

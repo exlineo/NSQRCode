@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy} from "@angular/core";
 import { Page } from "tns-core-modules/ui/page";
 
 import { BarcodeScanner } from 'nativescript-barcodescanner';
-import { AppService } from "../Services/app.service";
+import { ConfigService } from "../services/config.service";
 import { TimerService } from "../services/timer.service";
 import { Router } from "@angular/router";
 
@@ -24,7 +24,7 @@ export class ScanComponent implements OnInit {
         private page:Page,
         private route:Router,
         private barcodeScanner: BarcodeScanner,
-        public appServ:AppService,
+        public confServ:ConfigService,
         public tServ:TimerService) {
     }
 

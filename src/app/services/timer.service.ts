@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
-import { AppI, App } from "../interfaces/app";
-import { AppService } from "./app.service";
+import { AppI, AppC } from "../interfaces/appi";
+import { ConfigService } from "./config.service";
 import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: "root"
 })
 export class TimerService {
-    app:AppI
+    appc:AppI
 
     timer: number; // Durée totale du timer
     duree: string; // Durée à afficher dans la vue
@@ -16,11 +16,11 @@ export class TimerService {
     tictac; // L'interval qui se joue
 
     constructor(
-        private appServ:AppService,
+        private appServ:ConfigService,
         private route:Router
         ) {
-        this.app = this.appServ.app;
-        this.initTimer(this.app.duration, 1000);
+        this.appc = this.appServ.appc;
+        this.initTimer(this.appc.duration, 1000);
     }
     /**
      * Initialiser le timer

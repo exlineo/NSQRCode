@@ -1,9 +1,6 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="appServ.app.template.pageBackground" [color]="appServ.app.template.pageText">
-<!-- <ActionBar>
-    <StackLayout><Label text="Néoaquitania (by Cap Métiers)" class="entete up"></Label></StackLayout>
-</ActionBar> -->
+<!-- <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="appServ.app.template.pageBackground" [color]="appServ.app.template.pageText"> -->
 <GridLayout rows="*, auto, auto, *">
-    <Label [text]="appServ.app.manip.title" class="h1 up" row="2" (tap)="onTap()"></Label>
+    <Label [text]="confServ.appc.manip.title" class="h1 up" row="2" (tap)="onTap()"></Label>
     <Label [text]="tServ.duree" class="h2" row="3"></Label>
 </GridLayout>
-</Page>
+<!-- </Page> -->

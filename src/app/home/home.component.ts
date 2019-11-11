@@ -5,32 +5,33 @@ import { EventData } from "tns-core-modules/data/observable";
 import { Page } from "tns-core-modules/ui/page";
 
 import { Router } from "@angular/router";
-import { AppI, App } from "../interfaces/app";
-import { AppService } from "../services/app.service";
+import { AppI } from "../interfaces/appi";
+import { ConfigService } from "../services/config.service";
 import { TimerService } from "../services/timer.service";
 
 @Component({
-    selector: "accueil",
+    selector: "home",
     templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
 
-    app:AppI;
+    appc:AppI;
 
     constructor(
         private page:Page,
         private route:Router,
-        public appServ:AppService,
+        public confServ:ConfigService,
         private tServ:TimerService) {
     }
 
     ngOnInit(): void {
         this.page.actionBarHidden = true;
-        this.app = this.appServ.app;
+        this.appc = this.confServ.appc;
     }
     
     // Clic sur le bouton de validation
     onTap(args: EventData) {
         this.route.navigate(['/scan']);
     }
+    
 }

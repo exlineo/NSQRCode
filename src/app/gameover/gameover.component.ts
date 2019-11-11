@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Page } from "tns-core-modules/ui/page";
 
-import { AppService } from "../Services/app.service";
+import { ConfigService } from "../services/config.service";
 
 @Component({
     selector: "gameover",
@@ -11,7 +11,7 @@ export class GameOverComponent implements OnInit {
 
     constructor(
         private page:Page,
-        public appServ:AppService) {
+        public confServ:ConfigService) {
     }
 
     ngOnInit(): void {

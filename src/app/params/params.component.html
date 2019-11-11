@@ -2,7 +2,7 @@
 <ActionBar>
     <StackLayout><Label text="Sélectionnez l'atelier à attacher" class="entete up"></Label></StackLayout>
 </ActionBar>
-<GridLayout rows="*, 120">
+<GridLayout rows="*, 200">
 
     <StackLayout row="0">
         <ListView [items]="ateliers" (itemTap)="onItemTap($event)" class="list-group">
@@ -17,7 +17,7 @@
 
     <StackLayout row="1">
         <Label [text]="'Atelier choisi : ' + choix" class="h2 up"></Label>
-        <Image src="res://valide" stretch="aspectFit" (tap)="onTap($event)" class="h2"></Image>
+        <Button text="&#xf058;" row="1" col="0" colSpan="3" (tap)="onTap($event)" class="btn fapetit far"></Button>
     </StackLayout>
 </GridLayout>
 <!-- </Page> -->

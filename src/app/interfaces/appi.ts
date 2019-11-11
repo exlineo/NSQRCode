@@ -28,7 +28,7 @@ export interface TemplateI{
     headerBackground:string;
     headerText:string;
 }
-export class App implements AppI{
+export class AppC implements AppI{
     title = 'Coucou';
     description = "Description de l'expo";
     root = 'http://localhost';

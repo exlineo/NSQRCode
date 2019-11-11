@@ -5,7 +5,7 @@ import { screen } from "tns-core-modules/platform";
 
 import { setInterval, clearInterval } from "tns-core-modules/timer";
 import { BarcodeScanner } from 'nativescript-barcodescanner';
-import { AppService } from "../Services/app.service";
+import { ConfigService } from "../services/config.service";
 import { TimerService } from "../services/timer.service";
 
 @Component({
@@ -28,7 +28,7 @@ export class PageInfosComponent implements OnInit {
     constructor(
         private page:Page,
         private barcodeScanner: BarcodeScanner,
-        public appServ:AppService,
+        public confServ:ConfigService,
         public tServ:TimerService) {
     }
 
