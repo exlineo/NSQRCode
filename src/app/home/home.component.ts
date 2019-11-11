@@ -28,10 +28,8 @@ export class HomeComponent implements OnInit {
         this.page.actionBarHidden = true;
         this.appc = this.confServ.appc;
     }
-    
     // Clic sur le bouton de validation
     onTap(args: EventData) {
         this.route.navigate(['/scan']);
     }
-    
 }

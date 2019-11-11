@@ -1,0 +1,1 @@
+export const servAdr:string = "http://neoakitania.ddns.net/";
