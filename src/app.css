@@ -73,12 +73,14 @@ Page, ActionBar, ListView, .list-group, .list-group-item{
 
 /* AUWESOME FONT */
 .far {
-    font-family: "Font Awesome 5 Free", "fa-regular-400";
+    font-family: "FontAwesome"; 
+    /* font-family: "Font Awesome 5 Free", "fa-regular-400"; */
     font-weight: 400;
     font-size:140;
 }
 .fas {
-    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-family: "FontAwesome"; 
+    /* font-family: "Font Awesome 5 Free", "fa-solid-900"; */
     font-weight: 900;
 }
 .fagros{

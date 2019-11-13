@@ -15,10 +15,12 @@ export interface ManipI{
 export interface AtelierI{
     id:string;
     title:string;
-    active:boolean;
+    active?:boolean;
     team:string | number;
     background:string;
     instructions:string;
+    manip?:ManipI;
+    template?:TemplateI;
 }
 export interface TemplateI{
     logo:string;
@@ -28,6 +30,9 @@ export interface TemplateI{
     headerBackground:string;
     headerText:string;
 }
+/**
+ * Classe pour une instanciation d'une Application nue
+ */
 export class AppC implements AppI{
     title = 'Coucou';
     description = "Description de l'expo";
@@ -54,4 +59,15 @@ export class AppC implements AppI{
         background:"",
         instructions:"instructions pour l'animateur"
     }
+}
+/**
+ * Classe pour une instanciation d'un atelier nu
+ */
+export class AtelierC implements AtelierI{
+    id:"";
+    title:" ";
+    active:true;
+    team:"";
+    background:"";
+    instructions:"";
 }

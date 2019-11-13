@@ -2,34 +2,47 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { servAdr } from "../interfaces/globalEnv";
-import { AtelierI, TemplateI } from "../interfaces/appi";
+import { AtelierI, AtelierC } from "../interfaces/appi";
 
 @Injectable({
     providedIn: "root"
 })
 export class AteliersService {
+    /**
+     * Liste des ateliers typés reçue depuis le serveur
+     */
     ateliers:Array<AtelierI>;
-    gabarits:Array<TemplateI>;
-
+    /**
+     * L'atelier qui a été choisi sur la page 'paramètres' dans la liste des ateliers
+     */
     atelier:AtelierI;
-    gabarit:TemplateI;
-
+    /**
+     * JSON Récupéré après un scan
+     */
+    qrcodeJson:object;
+    /**
+     * Messages d'informations diffusés au fil de l'eau
+     */
+    infos:string;
+    /**
+     * Service central pour la gestion des données statiques de l'application
+     * @param http Appels de données AJAX
+     */
     constructor(private http: HttpClient){
-        // this.ateliers = ['construire', 'aider', 'developper', 'fabriquer', 'produire', 'transporter', 'accueillir', 'maintenir'];
+        this.getAteliers();
+        this.atelier = new AtelierC();
+        this.ateliers = [];
     }
-    // Avoir tous les ateliers
-    getItems(): Array<AtelierI> {
-        return this.ateliers;
-    }
-    // Avoir un objet dans la liste
-    getItem(id: number): AtelierI {
-        return this.ateliers[id];
-    }
-    // Définir l'atelier et le gabarit
+    /**
+     * Définir l'atelier et le gabarit
+     * @param n index de l'atelier choisi
+     */
     setAtelier(n:number){
         this.atelier = this.ateliers[n];
-        this.gabarit = this.gabarits[n];
     }
+    /**
+     * Appel et traitement des ateliers depuis le serveur strapi
+     */
     getAteliers(){
         this.http.get(servAdr + 'escapes/static/').subscribe(
             data => {
@@ -40,14 +53,33 @@ export class AteliersService {
                         active:a.active,
                         team:a.team,
                         background:a.background,
-                        instructions:a.instructions
-                    }
-                    
+                        instructions:a.instructions,
+                        template:a.template
+                    };
                     this.ateliers.push(at);
-                    this.gabarits.push(a.template);
                 }
-                console.log(this.ateliers, this.gabarits);
+                console.log(this.ateliers);
             }
         );
+    }
+    /**
+     * 
+     */
+    getQRCode(){
+
+    }
+    /**
+     * Réinitialiser les équipes dans la liste des ateliers
+     */
+    initTeams(){
+        for(let a of this.ateliers){
+            a.team = '0';
+        }
+    }
+    /**
+     * Réinitialiser les équipes dans l'atelier en cours
+     */
+    changeTeam(t:string){
+        this.atelier.team = t;
     }
 }

@@ -5,19 +5,19 @@
 <GridLayout rows="*, 200">
 
     <StackLayout row="0">
-        <ListView [items]="ateliers" (itemTap)="onItemTap($event)" class="list-group">
+        <ListView [items]="ateliersServ.ateliers" (itemTap)="onItemTap($event)" class="list-group">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                 <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
                 <StackLayout>
-                    <Label [text]="item" class="list-group-item up"></Label>
+                    <Label [text]="item.title" class="list-group-item up"></Label>
                 </StackLayout>
             </ng-template>
         </ListView>
     </StackLayout>
 
     <StackLayout row="1">
-        <Label [text]="'Atelier choisi : ' + choix" class="h2 up"></Label>
-        <Button text="&#xf054;" row="1" col="0" colSpan="3" (tap)="onTap($event)" class="btn fapetit far"></Button>
+        <Label [text]="'Atelier choisi : ' + ateliersServ.atelier.title" class="h2 up"></Label>
+        <Button text="&#xf058;" row="1" col="0" colSpan="3" (tap)="onTap($event)" class="btn fapetit far"></Button>
     </StackLayout>
 </GridLayout>
 <!-- </Page> -->

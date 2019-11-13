@@ -6,39 +6,40 @@ import { Page } from "tns-core-modules/ui/page";
 import { Router } from "@angular/router";
 
 import { AteliersService } from "../services/ateliers.services";
+import { AtelierI, AtelierC } from "../interfaces/appi";
 
 @Component({
     selector: "accueil",
     templateUrl: "./params.component.html"
 })
 export class ParamsComponent implements OnInit {
-
-    ateliers: Array<string>;
-    choix:string = '';
-    okBtn:string = '\uf058';
     
-    constructor(private ateliersServ:AteliersService, private route:Router) {}
+    constructor(public ateliersServ:AteliersService, private route:Router) {}
 
     ngOnInit(): void {
-        this.ateliersServ.getAteliers();
-        this.ateliers = ['construire', 'aider', 'developper', 'fabriquer', 'produire', 'transporter', 'accueillir', 'maintenir'];
     }
-
-    // Sélection de l'atelier dans la liste
+    /**
+     * Sélection de l'atelier dans la liste
+     * @param e Evénement transféré par le système
+     */
     onItemTap(e:ItemEventData){
-        console.log(this.ateliers[e.index]);
-        this.choix = this.ateliers[e.index];
+        console.log(this.ateliersServ.ateliers[e.index]);
         this.ateliersServ.setAtelier(e.index);
     }
-
-    // Clic sur le bouton de validation pour aller à la page d'accueil
+    /**
+     * Clic sur le bouton de validation pour aller à la page d'accueil
+     * @param args Evénement transféré par le système
+     */
     onTap(args: EventData) {
-        if(this.choix.length > 0){
-            console.log('Validé');
+        if(this.ateliersServ.atelier.title.length > 0){
             this.route.navigate(['/home']);
         }
     }
 }
+/**
+ * Enlever la barre d'action
+ * @param args Evénement transféré par le système
+ */
 export function onPageLoaded(args: EventData) {
     const page = <Page>args.object;
     page.actionBarHidden = false;

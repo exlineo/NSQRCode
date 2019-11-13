@@ -9,6 +9,9 @@ import { SocketService } from "./services/socket.service";
 import { ConfigService } from "./services/config.service";
 import { TimerService } from "./services/timer.service";
 
+import { SocketIOModule } from "nativescript-socketio/angular";
+import { sock } from "./interfaces/globalEnv";
+
 @NgModule({
     bootstrap: [
         AppComponent
@@ -16,7 +19,8 @@ import { TimerService } from "./services/timer.service";
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptHttpClientModule
+        NativeScriptHttpClientModule,
+        SocketIOModule.forRoot(sock)
     ],
     declarations: [
         AppComponent

@@ -85,7 +85,7 @@ export class TimerService {
             } else {
                 this.duree = String(reste + ' sec');
             }
-
+            // A la fin du timer, renvoie vers la fin du jeu
             if(this.timer <= 0){
                 this.route.navigate(['/gameover']);
             }
