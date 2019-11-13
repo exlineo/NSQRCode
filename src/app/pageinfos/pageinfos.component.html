@@ -1,9 +1,9 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="confServ.app.template.pageBackground" [color]="confServ.app.template.pageText">
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="ateliersServ.atelier.template.pageBackground" [color]="ateliersServ.atelier.template.pageText">
 
     <GridLayout rows="auto, *, auto" columns="auto, *, auto">
         <Label [text]="ateliersServ.atelier.title" class="h3" row="0" col="0"></Label>
         <Label [text]="tServ.duree" class="h3" row="0" col="2"></Label>
         <Button text="&#xf029;" (tap)="onScan()" row="2" col="2" colSpan="3" class="btn fapetit fas"></Button>
-        <Label [text]="confServ.appc.manip.content" class="h3" row="1" col="1"></Label>
+        <Label [text]="ateliersServ.atelier.manip.content" class="h3" row="1" col="1"></Label>
     </GridLayout>
 </Page>

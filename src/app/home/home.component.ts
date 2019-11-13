@@ -6,8 +6,9 @@ import { Page } from "tns-core-modules/ui/page";
 
 import { Router } from "@angular/router";
 import { AppI } from "../interfaces/appi";
-import { ConfigService } from "../services/config.service";
 import { TimerService } from "../services/timer.service";
+import { AteliersService } from "../services/ateliers.services";
+import { servAdr } from '../interfaces/globalEnv';
 
 @Component({
     selector: "home",
@@ -15,18 +16,15 @@ import { TimerService } from "../services/timer.service";
 })
 export class HomeComponent implements OnInit {
 
-    appc:AppI;
-
     constructor(
         private page:Page,
         private route:Router,
-        public confServ:ConfigService,
+        public ateliersServ:AteliersService,
         private tServ:TimerService) {
     }
 
     ngOnInit(): void {
         this.page.actionBarHidden = true;
-        this.appc = this.confServ.appc;
     }
     // Clic sur le bouton de validation
     onTap(args: EventData) {

@@ -6,7 +6,6 @@ import { TimerService } from "./timer.service";
 import { AteliersService } from "./ateliers.services";
 
 import { servAdr } from "../interfaces/globalEnv";
-import { off } from "tns-core-modules/application/application";
 
 @Injectable({
     providedIn: "root"

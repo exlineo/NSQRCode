@@ -1,6 +1,8 @@
 <!-- <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="appServ.app.template.pageBackground" [color]="appServ.app.template.pageText"> -->
-<GridLayout rows="*, auto, auto, *">
-    <Label [text]="confServ.appc.manip.title" class="h1 up" row="2" (tap)="onTap()"></Label>
+<GridLayout rows="*, auto, auto, auto, *" [backgroundColor]="ateliersServ.atelier.template.pageBackground">
+    <Image [src]="servAdr+ateliersServ.atelier.template.logo" row="1" stretch="aspectFit"></Image>
+    <Label [text]="ateliersServ.atelier.title" class="h1 up" row="2" (tap)="onTap()"></Label>
     <Label [text]="tServ.duree" class="h2" row="3"></Label>
 </GridLayout>
+
 <!-- </Page> -->

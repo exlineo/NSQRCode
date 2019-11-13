@@ -43,6 +43,7 @@ export class AteliersService {
      */
     setAtelier(n:number){
         this.atelier = this.ateliers[n];
+        console.log(this.atelier);
     }
     /**
      * Appel et traitement des ateliers depuis le serveur strapi
@@ -59,8 +60,10 @@ export class AteliersService {
                         team:a.team,
                         background:a.background,
                         instructions:a.instructions,
+                        manip:data['escape']['manip'],
                         template:a.template
                     };
+                    
                     this.ateliers.push(at);
                 }
                 this.tServ.timer = data['session']['duration']['manip'];

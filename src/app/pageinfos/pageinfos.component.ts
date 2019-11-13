@@ -3,7 +3,6 @@ import { WebView, LoadEventData } from "tns-core-modules/ui/web-view";
 import { Page } from "tns-core-modules/ui/page";
 import { screen } from "tns-core-modules/platform";
 
-import { setInterval, clearInterval } from "tns-core-modules/timer";
 import { BarcodeScanner } from 'nativescript-barcodescanner';
 import { ConfigService } from "../services/config.service";
 import { TimerService } from "../services/timer.service";
@@ -30,7 +29,6 @@ export class PageInfosComponent implements OnInit {
         private page:Page,
         private barcodeScanner: BarcodeScanner,
         public ateliersServ:AteliersService,
-        public confServ:ConfigService,
         public tServ:TimerService) {
     }
 

@@ -17,6 +17,7 @@ export class ParamsComponent implements OnInit {
     constructor(public ateliersServ:AteliersService, private route:Router) {}
 
     ngOnInit(): void {
+        // console.log(this.ateliersServ.atelier.template.pageBackground);
     }
     /**
      * Sélection de l'atelier dans la liste
