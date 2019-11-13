@@ -14,6 +14,7 @@ export class TimerService {
     pause: boolean; // L'interval est-il en pause ?
     tick: number; // Rythme de mise à jour de l'interval
     tictac; // L'interval qui se joue
+    phase:string; // Savoir ou nous en sommes
 
     constructor(
         private appServ:ConfigService,
@@ -89,6 +90,21 @@ export class TimerService {
             if(this.timer <= 0){
                 this.route.navigate(['/gameover']);
             }
+        }
+    }
+    // Un truc copié mais ché pas si c'est très utile
+    checkPhase(){
+        switch(this.phase){
+            case 'manip':
+                this.route.navigate(['/scan']);
+                break;
+            case 'quiz' :
+                break;
+            case 'gameover' :
+                    this.route.navigate(['/gameover']);
+                break;
+            default:
+                this.route.navigate(['/home']);
         }
     }
 }

@@ -63,10 +63,10 @@ export class AteliersService {
                     };
                     this.ateliers.push(at);
                 }
-
-                this.duration = data['session']['duration'];
-                console.log(this.ateliers);
-            }
+                this.tServ.timer = data['session']['duration']['manip'];
+                // this.duration = data['session']['duration'];
+                console.log("Timer", this.tServ.timer);
+            },
         );
     }
     /**
