@@ -4,7 +4,6 @@ import { Page } from "tns-core-modules/ui/page";
 import { screen } from "tns-core-modules/platform";
 
 import { BarcodeScanner } from 'nativescript-barcodescanner';
-import { ConfigService } from "../services/config.service";
 import { TimerService } from "../services/timer.service";
 import { AteliersService } from "../services/ateliers.services";
 
@@ -55,7 +54,7 @@ export class PageInfosComponent implements OnInit {
             orientation: "landscape",     
             openSettingsIfPermissionWasPreviouslyDenied: true //ios only 
         }).then((result) => {
-            this.webViewSrc = result.text;
+            // this.webViewSrc = result.text;
             alert({
                 title: "Vous scannez",
                 message: "Format: " + result.format + ",\nContent: " + result.text,

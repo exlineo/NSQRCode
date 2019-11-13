@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 import { servAdr } from "../interfaces/globalEnv";
-import { AtelierI, AtelierC, DurationI, DurationC } from "../interfaces/appi";
+import { AtelierI, AtelierC, DurationI, DurationC, ManipI } from "../interfaces/appi";
 import { TimerService } from "./timer.service";
 
 @Injectable({
@@ -30,12 +30,12 @@ export class AteliersService {
      * Service central pour la gestion des données statiques de l'application
      * @param http Appels de données AJAX
      */
-    constructor(private http: HttpClient, private tServ:TimerService){
-        this.getAteliers();
-        this.atelier = new AtelierC();
-        this.ateliers = [];
-
-        this.duration = new DurationC();
+    constructor(
+        private http: HttpClient){
+            this.getAteliers();
+            this.atelier = new AtelierC();
+            this.ateliers = [];
+            this.duration = new DurationC();
     }
     /**
      * Définir l'atelier et le gabarit
@@ -51,24 +51,22 @@ export class AteliersService {
     getAteliers(){
         this.http.get(servAdr + 'escapes/static/').subscribe(
             data => {
+                console.log(data['session']['duration']['manip']);
+                let manip_tmp:ManipI = {'content':data['escape']['manip']['content'], 'gameover':data['escape']['manip']['gameover']}
                 for(let a of data['ateliers']){
                     let at = {
                         id:a.id,
                         title:a.title,
                         active:a.active,
-                        duration:a.duration,
-                        team:a.team,
+                        duration:parseInt(data['session']['duration']['manip']),
                         background:a.background,
                         instructions:a.instructions,
-                        manip:data['escape']['manip'],
+                        manip:manip_tmp,
                         template:a.template
                     };
-                    
                     this.ateliers.push(at);
                 }
-                this.tServ.timer = data['session']['duration']['manip'];
-                // this.duration = data['session']['duration'];
-                console.log("Timer", this.tServ.timer);
+                // this.atelier = this.ateliers[0];
             },
         );
     }
@@ -77,25 +75,5 @@ export class AteliersService {
      */
     getQRCode(){
 
-    }
-    /**
-     * Réinitialiser les équipes dans la liste des ateliers
-     */
-    initTeams(){
-        for(let a of this.ateliers){
-            a.team = '0';
-        }
-    }
-    /**
-     * Réinitialiser les équipes dans l'atelier en cours
-     */
-    changeTeam(t:string){
-        this.atelier.team = t;
-    }
-    /**
-     * Réinitialiser modifier le score d'une équipe (pas de score actuellement enregistré)
-     */
-    changeScore(t:number){
-        // this.atelier.score = t;
     }
 }

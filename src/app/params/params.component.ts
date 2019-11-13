@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 
 import { AteliersService } from "../services/ateliers.services";
 import { AtelierI, AtelierC } from "../interfaces/appi";
+import { TimerService } from "../services/timer.service";
 
 @Component({
     selector: "accueil",
@@ -14,10 +15,13 @@ import { AtelierI, AtelierC } from "../interfaces/appi";
 })
 export class ParamsComponent implements OnInit {
     
-    constructor(public ateliersServ:AteliersService, private route:Router) {}
+    constructor(
+        public ateliersServ:AteliersService,
+        private tServ:TimerService,
+        private route:Router) {
+    }
 
     ngOnInit(): void {
-        // console.log(this.ateliersServ.atelier.template.pageBackground);
     }
     /**
      * Sélection de l'atelier dans la liste
@@ -33,6 +37,7 @@ export class ParamsComponent implements OnInit {
      */
     onTap(args: EventData) {
         if(this.ateliersServ.atelier.title.length > 0){
+            this.tServ.initTimer();
             this.route.navigate(['/home']);
         }
     }

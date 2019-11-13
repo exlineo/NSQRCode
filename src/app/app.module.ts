@@ -5,8 +5,9 @@ import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BarcodeScanner } from 'nativescript-barcodescanner';
+
+import { AteliersService } from "./services/ateliers.services";
 import { SocketService } from "./services/socket.service";
-import { ConfigService } from "./services/config.service";
 import { TimerService } from "./services/timer.service";
 
 import { SocketIOModule } from "nativescript-socketio/angular";
@@ -26,10 +27,10 @@ import { sock } from "./interfaces/globalEnv";
         AppComponent
     ],
     providers:[
-        BarcodeScanner,
-        ConfigService,
+        AteliersService,
+        SocketService,
         TimerService,
-        SocketService
+        BarcodeScanner
     ],
     schemas: [
         NO_ERRORS_SCHEMA

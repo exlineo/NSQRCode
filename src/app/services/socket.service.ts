@@ -6,47 +6,44 @@ import { TimerService } from "./timer.service";
 import { AteliersService } from "./ateliers.services";
 
 import { servAdr } from "../interfaces/globalEnv";
+import { Router } from "@angular/router";
+import { SessionI } from "../interfaces/appi";
 
 @Injectable({
     providedIn: "root"
 })
 export class SocketService {
 
-    datas:any;
-
     constructor(
         private socketIO: SocketIO,
         private ngZone: NgZone,
-        private tServ:TimerService,
         private ateliersServ:AteliersService,
-        private http:HttpClient){
-            // Récupération des événements
-            // Coucou
-            this.socketIO.on("hello", data => {
-                this.ngZone.run(() => {
-                console.log(data);
-                });
-            });
-            // Lancement
-            this.socketIO.on('launchSession', (t, s) => this.launchSession(t, s));
-            this.socketIO.on('changePhase', (ph) => this.changePhase(ph));
-            this.socketIO.on('freezeTime', (t, c) => this.freezeTime(t, c));
-            this.socketIO.on('teamInAtelier', (t, a) => this.teamInAtelier(t, a));
-            this.socketIO.on('teamScores', (t, s) => this.teamScores(t, s));
+        private tServ:TimerService,
+        private route:Router){
     }
     /**
-     * Envoyer un test au serveur
+     * Lancer la session
+     * @param t nombre d'équipe (obsolète)
+     * @param s objet session
      */
-    hello() {
-        this.socketIO.emit("hello", { hello: "hello" });
+    launchSession(t:string, s:any){
+        this.ateliersServ.atelier.duration = s['duration']['manip'];
+        this.changePhase('off'); // Renvoyer sur la page d'accueil
     }
-
-    launchSession(t:string, s:string){
-
-    }
-
+    /**
+     * Changement d'état dans la manip d'après la synchro
+     * @param ph Etat de la phase
+     */
     changePhase(ph:string){
-
+        console.log("Change Phase");
+        if(ph =='manip'){
+            this.route.navigate(['/scan']);
+            this.tServ.initTimer();
+            this.tServ.launchTimer();
+        }else{
+            this.route.navigate(['/home']);
+            this.tServ.resetTimer(); // Réinitialiser le timer
+        }
     }
     /**
      * Arrêter le timer suite à un événement du socket
@@ -55,51 +52,44 @@ export class SocketService {
      */
     freezeTime(f, c){
         if(!f) {
-            this.tServ.timer = c;
-            this.tServ.pause = false;
+            this.tServ.playTimer(c);
         } else {
-            this.tServ.pause = true;
+            this.tServ.pauseTimer(c);
         }
     }
     /**
-     * Modifier l'équipe de l'atelier actuel
-     * @param t Nouvel ID d'une équipe
-     * @param a L'atelier concerné (pas utile ici a priori)
+     * Connexion et gestion du socketIO
      */
-    teamInAtelier(t:string, a:string){
-        this.ateliersServ.changeTeam(t);
-    }
-
-    teamScores(t:string, s:number){
-        this.ateliersServ.changeScore(s);
+    conneSock(){
+        this.socketIO.connect();
+            // Récupération des événements
+            this.socketIO.on("hello", data => {
+                console.log("Socket", data);
+                this.ngZone.run(() => {
+                    console.log("Re socket", data);
+                });
+            });
+            // Lancement
+            this.socketIO.on('launchSession', (t, s) => {
+                this.ngZone.run(() => {
+                        this.launchSession(t, s)
+                    });
+                });
+            this.socketIO.on('changePhase', (ph) => {
+                this.ngZone.run(() => {
+                    this.changePhase(ph)
+                    });
+                });
+            this.socketIO.on('freezeTime', (t, c) => {
+                this.ngZone.run(() => {
+                    this.freezeTime(t, c)
+                    });
+                });
     }
     /**
-     * FETCHS
+     * Déconnexion du socketIO
      */
-    fetchPut(u:string, d:any){
-        this.http.put(u, d).subscribe(data => {
-
-            });
-    }
-
-    fetchLaunch(numOfTeams:number=5, manip:number, quiz:number){
-        let duration = {manip, quiz};
-        this.fetchPut(servAdr+'sessions/launch/', {numOfTeams, duration});
-    }
-
-    fetchPhase(p:string = 'off'){
-        this.fetchPut(servAdr+'sessions/phase/'+p, {});
-    }
-
-    fetchFreeze(f:boolean=false, countdown:number=-1){
-        this.fetchPut(servAdr+'sessions/freeze/'+f, {countdown});
-    }
-
-    fetchTeamAtelier(tId:string='0', aId:string){
-        this.fetchPut(servAdr+'ateliers/team/'+aId, {'team':tId});
-    }
-
-    fetchScore(tId:string, aId:string, score:number=0){
-        this.fetchPut(servAdr+'teams/score/'+tId, {'atelier':aId, score});
+    deconneSock(){
+        this.socketIO.disconnect();
     }
 }

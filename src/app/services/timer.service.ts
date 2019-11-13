@@ -1,34 +1,39 @@
 import { Injectable } from "@angular/core";
-import { AppI, AppC } from "../interfaces/appi";
-import { ConfigService } from "./config.service";
+import { setInterval, clearInterval } from "tns-core-modules/timer";
 import { Router } from "@angular/router";
+import { AteliersService } from "./ateliers.services";
 
 @Injectable({
     providedIn: "root"
 })
 export class TimerService {
-    appc:AppI
 
     timer: number; // Durée totale du timer
     duree: string; // Durée à afficher dans la vue
     pause: boolean; // L'interval est-il en pause ?
     tick: number; // Rythme de mise à jour de l'interval
-    tictac; // L'interval qui se joue
+    tictac:any; // L'interval qui se joue
     phase:string; // Savoir ou nous en sommes
 
     constructor(
-        private appServ:ConfigService,
-        private route:Router
-        ) {
-        this.appc = this.appServ.appc;
-        this.initTimer(this.appc.duration, 1000);
+        private ateliersServ:AteliersService,
+        private route:Router) {
+            
+    }
+    initTimer(){
+        this.setDuree();
+        this.setTick();
+        if(this.timer && this.timer > 0){
+            this.setTimer();
+        }
     }
     /**
-     * Initialiser le timer
+     * Lancer l'interval du chrono
      */
-    initTimer(d: number = 0, t: number = 1000) {
-        this.setDuree(d);
-        this.setTick(t);
+    launchTimer(){
+        if(this.tictac){
+            this.detruitTimer();
+        }
         this.pause = false;
         this.tictac = setInterval(() => {
             if (!this.pause) {
@@ -39,25 +44,35 @@ export class TimerService {
     /**
      * Indiquer la durée du timer. Il s'arrête à la fin
      */
-    setDuree(d: number) {
-        this.timer = d;
+    setDuree(d:number = -1) {
+        if(d > -1){
+            this.timer = d;
+        }else{
+            this.timer = this.ateliersServ.atelier.duration;
+        }
     }
     /**
      * Paramétrer le tick qui va déterminer le rythme de déroulé de l'interval
      */
-    setTick(t: number) {
+    setTick(t: number = 1000) {
         this.tick = t;
     }
     /**
      * Mettre le timer en pause
      */
-    pauseTimer() {
+    pauseTimer(t:number = -1) {
+        if(t > -1){
+            this.timer = t;
+        }
         this.pause = true;
     }
     /** 
      * Jouer le timer
      */
-    playTimer() {
+    playTimer(t:number = -1) {
+        if(t > -1){
+            this.timer = t;
+        }
         this.pause = false;
     }
     /**
@@ -65,17 +80,25 @@ export class TimerService {
      */
     detruitTimer() {
         clearInterval(this.tictac);
+        this.tictac = null;
+    }
+    /**
+     * Relancer le timer
+     */
+    resetTimer(){
+        this.detruitTimer();
+        this.timer = this.ateliersServ.atelier.duration;
+        this.pause = true; // Timer en pause
+        this.setTimer(); // Mettre à jour durée
     }
     /**
      * Renvoyer une valeur pour l'affichage
      */
     setTimer() {
-        if(this.timer > 0){
-            this.timer -= 1;
+        console.log("Set timer", this.timer, this.duree);
+        if(this.timer >= 0){
             let mod = Math.floor(this.timer / 60);
             let reste = this.timer - (mod * 60);
-
-            // console.log("mod : "+mod, "reste : "+reste);
 
             if (this.timer > 59) {
                 if (reste > 0) {
@@ -90,21 +113,8 @@ export class TimerService {
             if(this.timer <= 0){
                 this.route.navigate(['/gameover']);
             }
+            this.timer -= 1;
         }
     }
-    // Un truc copié mais ché pas si c'est très utile
-    checkPhase(){
-        switch(this.phase){
-            case 'manip':
-                this.route.navigate(['/scan']);
-                break;
-            case 'quiz' :
-                break;
-            case 'gameover' :
-                    this.route.navigate(['/gameover']);
-                break;
-            default:
-                this.route.navigate(['/home']);
-        }
-    }
+    
 }

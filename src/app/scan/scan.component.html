@@ -4,6 +4,7 @@
         <Label [text]="ateliersServ.atelier.title" class="h3" row="0" col="0"></Label>
         <Label [text]="tServ.duree" class="h3" row="0" col="2"></Label>
         <Button text="&#xf029;" (tap)="onScan()" row="1" col="0" colSpan="3" class="btngros fagros fas"></Button>
-        <Label [text]="ateliersServ.ateliers.manip.content" colSpan="3" class="h3" row="2" col="0"></Label>
+        <!-- <Label [text]="ateliersServ.atelier.manip.content" colSpan="3" class="h3" row="2" col="0"></Label> -->
+        <HtmlView html="{{ ateliersServ.atelier.manip.content }}" colSpan="3" class="h3" row="2" col="0"></HtmlView>
     </GridLayout>
 <!-- </Page> -->

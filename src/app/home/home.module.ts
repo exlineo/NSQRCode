@@ -12,9 +12,6 @@ import { HomeComponent } from "./home.component";
     declarations: [
         HomeComponent
     ],
-    providers:[
-        
-    ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
