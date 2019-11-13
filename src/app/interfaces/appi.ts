@@ -22,6 +22,14 @@ export interface AtelierI{
     manip?:ManipI;
     template?:TemplateI;
 }
+export interface DurationI{
+    manip:string | number;
+    quiz:string | number;
+}
+export interface SessionI{
+    phase:string;
+    duration:DurationI;
+}
 export interface TemplateI{
     logo:string;
     backgroundImage:string;
@@ -65,9 +73,14 @@ export class AppC implements AppI{
  */
 export class AtelierC implements AtelierI{
     id:"";
-    title:" ";
+    title:"-";
     active:true;
     team:"";
     background:"";
     instructions:"";
+}
+
+export class DurationC implements DurationI{
+    manip:600;
+    quiz:600;
 }

@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { servAdr } from "../interfaces/globalEnv";
-import { AtelierI, AtelierC } from "../interfaces/appi";
+import { AtelierI, AtelierC, DurationI, DurationC } from "../interfaces/appi";
+import { TimerService } from "./timer.service";
 
 @Injectable({
     providedIn: "root"
@@ -16,6 +17,7 @@ export class AteliersService {
      * L'atelier qui a été choisi sur la page 'paramètres' dans la liste des ateliers
      */
     atelier:AtelierI;
+    duration:DurationI;
     /**
      * JSON Récupéré après un scan
      */
@@ -28,10 +30,12 @@ export class AteliersService {
      * Service central pour la gestion des données statiques de l'application
      * @param http Appels de données AJAX
      */
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private tServ:TimerService){
         this.getAteliers();
         this.atelier = new AtelierC();
         this.ateliers = [];
+
+        this.duration = new DurationC();
     }
     /**
      * Définir l'atelier et le gabarit
@@ -51,6 +55,7 @@ export class AteliersService {
                         id:a.id,
                         title:a.title,
                         active:a.active,
+                        duration:a.duration,
                         team:a.team,
                         background:a.background,
                         instructions:a.instructions,
@@ -58,6 +63,8 @@ export class AteliersService {
                     };
                     this.ateliers.push(at);
                 }
+
+                this.duration = data['session']['duration'];
                 console.log(this.ateliers);
             }
         );
@@ -81,5 +88,11 @@ export class AteliersService {
      */
     changeTeam(t:string){
         this.atelier.team = t;
+    }
+    /**
+     * Réinitialiser modifier le score d'une équipe (pas de score actuellement enregistré)
+     */
+    changeScore(t:number){
+        // this.atelier.score = t;
     }
 }

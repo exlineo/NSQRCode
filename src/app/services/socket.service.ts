@@ -30,6 +30,10 @@ export class SocketService {
             });
             // Lancement
             this.socketIO.on('launchSession', (t, s) => this.launchSession(t, s));
+            this.socketIO.on('changePhase', (ph) => this.changePhase(ph));
+            this.socketIO.on('freezeTime', (t, c) => this.freezeTime(t, c));
+            this.socketIO.on('teamInAtelier', (t, a) => this.teamInAtelier(t, a));
+            this.socketIO.on('teamScores', (t, s) => this.teamScores(t, s));
     }
     /**
      * Envoyer un test au serveur
@@ -42,19 +46,33 @@ export class SocketService {
 
     }
 
-    changePhase(){
+    changePhase(ph:string){
 
     }
-
-    freezeTime(){
-
+    /**
+     * Arrêter le timer suite à un événement du socket
+     * @param f Freeze ok
+     * @param c Nouveau temps du timer
+     */
+    freezeTime(f, c){
+        if(!f) {
+            this.tServ.timer = c;
+            this.tServ.pause = false;
+        } else {
+            this.tServ.pause = true;
+        }
+    }
+    /**
+     * Modifier l'équipe de l'atelier actuel
+     * @param t Nouvel ID d'une équipe
+     * @param a L'atelier concerné (pas utile ici a priori)
+     */
+    teamInAtelier(t:string, a:string){
+        this.ateliersServ.changeTeam(t);
     }
 
-    teamInAtelier(){
-
-    }
-    teamScore(){
-
+    teamScores(t:string, s:number){
+        this.ateliersServ.changeScore(s);
     }
     /**
      * FETCHS
