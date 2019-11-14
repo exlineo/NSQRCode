@@ -13,10 +13,12 @@
             </ng-template>
         </ListView>
     </StackLayout>
-
-    <StackLayout row="2">
-        <Label [text]="'Atelier choisi : ' + ateliersServ.atelier.title" class="h2 up"></Label>
-        <Button text="&#xf058;" row="1" col="0" colSpan="3" (tap)="onTap($event)" class="btn fapetit far"></Button>
-    </StackLayout>
+    <GridLayout columns="*, 200" backgroundColor="orangered" row="2">
+        <StackLayout col="0" colSpan="3">
+            <Label [text]="'Atelier choisi : ' + ateliersServ.atelier.title" class="h2 up"></Label>
+            <Button text="&#xf058;" (tap)="onTap($event)" class="btn fapetit far"></Button>
+        </StackLayout>
+        <Button text="&#xf013;" col="1" (tap)="onTapSettings()" class="btn fapetit far"></Button>
+    </GridLayout>
 </GridLayout>
 <!-- </Page> -->

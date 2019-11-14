@@ -32,6 +32,8 @@ export class AteliersService {
     docs: Folder;
     dos: Folder;
     file: File;
+
+    url:string;
     /**
      * Service central pour la gestion des données statiques de l'application
      * @param http Appels de données AJAX
@@ -43,17 +45,31 @@ export class AteliersService {
         this.atelier = new AtelierC();
         this.ateliers = [];
         this.duration = new DurationC();
+
+        this.docs = <Folder>knownFolders.currentApp();
+        this.dos = <Folder>this.docs.getFolder("QRConfig");
+        this.file = <File>this.dos.getFile("config.txt");
+
         this.litConfig();
     }
-    litConfig() {
-        this.docs = <Folder>knownFolders.documents();
-        this.dos = <Folder>this.docs.getFolder("QRConfig");
-        this.file = <File>this.dos.getFile("config.json");
 
+    setConfig() {
+        console.log("fichier", this.file);
+        this.file.writeText("http://neoakitania.ddns.net/")
+            .then((result) => {
+                this.litConfig();
+        }).catch((err) => {
+            console.log(err.stack);
+        });
+    }
+
+    litConfig(){
         this.file.readText()
             .then((res) => {
-                console.log("Lecture config", res);
-            }).catch((err) => {
+                console.log("Fichier local", res);
+                this.url = res;
+            })
+            .catch((err) => {
                 console.log(err.stack);
             });
     }

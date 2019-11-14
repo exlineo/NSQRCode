@@ -9,7 +9,7 @@
             <Label [text]="ateliersServ.qrcodeJson.title" class="h1" row="0" col="0" colSpan="3"></Label>
             <Image [src]="adr + ateliersServ.qrcodeJson.image" *ngIf="ateliersServ.qrcodeJson.image" row="1" col="0" colSpan="3" ></Image>
             <Button text="&#xf029;" (tap)="onScan()" row="2" col="2" class="btn fapetit fas"></Button>
-            <HtmlView [html]="ateliersServ.qrcodeJson.content" *ngIf="ateliersServ.qrcodeJson.content" class="h3" row="2" col="0" colSpan="3"></HtmlView>
+            <HtmlView [html]="ateliersServ.qrcodeJson.content" *ngIf="ateliersServ.qrcodeJson.content" class="h3" row="2" col="0" colSpan="2"></HtmlView>
         </GridLayout>
     </GridLayout>
 </Page>

@@ -3,6 +3,7 @@ import { ItemEventData } from "tns-core-modules/ui/list-view";
 
 import { EventData } from "tns-core-modules/data/observable";
 import { Page } from "tns-core-modules/ui/page";
+import * as dialogs from "tns-core-modules/ui/dialogs";
 import { Router } from "@angular/router";
 
 import { AteliersService } from "../services/ateliers.services";
@@ -14,6 +15,8 @@ import { TimerService } from "../services/timer.service";
     templateUrl: "./params.component.html"
 })
 export class ParamsComponent implements OnInit {
+
+    write:boolean;
     
     constructor(
         public ateliersServ:AteliersService,
@@ -22,6 +25,7 @@ export class ParamsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.write = false;
     }
     /**
      * Sélection de l'atelier dans la liste
@@ -39,6 +43,18 @@ export class ParamsComponent implements OnInit {
             this.tServ.initTimer();
             this.route.navigate(['/home']);
         }
+    }
+    onTapSettings(){
+        dialogs.prompt({
+            title: "Paramètre réseau",
+            message: "Saisissez l'adresse réseau pour accéder aux données",
+            okButtonText: "Valider",
+            cancelButtonText: "Annuler",
+            inputType: dialogs.inputType.text
+        }).then(r => {
+            this.ateliersServ.setConfig();
+            console.log("Dialog result: " + r.result + ", text: " + r.text);
+        });
     }
 }
 /**
