@@ -28,7 +28,6 @@ export class ParamsComponent implements OnInit {
      * @param e Evénement transféré par le système
      */
     onItemTap(e:ItemEventData){
-        console.log(this.ateliersServ.ateliers[e.index]);
         this.ateliersServ.setAtelier(e.index);
     }
     /**

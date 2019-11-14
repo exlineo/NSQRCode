@@ -3,7 +3,6 @@
     <StackLayout><Label text="Sélectionnez l'atelier à attacher" class="entete up"></Label></StackLayout>
 </ActionBar>
 <GridLayout rows="*, *, 200" backgroundColor="orangered">
-
     <StackLayout row="1">
         <ListView [items]="ateliersServ.ateliers" (itemTap)="onItemTap($event)" class="list-group">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">

@@ -6,6 +6,7 @@ import { screen } from "tns-core-modules/platform";
 import { BarcodeScanner } from 'nativescript-barcodescanner';
 import { TimerService } from "../services/timer.service";
 import { AteliersService } from "../services/ateliers.services";
+import { servAdr } from "../interfaces/globalEnv";
 
 @Component({
     selector: "infos",
@@ -19,7 +20,7 @@ export class PageInfosComponent implements OnInit {
     tictac; // Interval
     timer:number;
     duree:string;
-
+    adr:string;
     scanBtn:object;
 
     @ViewChild("maPageVue", { read: ElementRef, static: false }) webViewRef: ElementRef;
@@ -29,6 +30,7 @@ export class PageInfosComponent implements OnInit {
         private barcodeScanner: BarcodeScanner,
         public ateliersServ:AteliersService,
         public tServ:TimerService) {
+            this.adr = servAdr;
     }
 
     ngOnInit(): void {
@@ -52,8 +54,9 @@ export class PageInfosComponent implements OnInit {
             torchOn: false,               
             resultDisplayDuration: 500,   
             orientation: "landscape",     
-            openSettingsIfPermissionWasPreviouslyDenied: true //ios only 
+            openSettingsIfPermissionWasPreviouslyDenied: true // ios only 
         }).then((result) => {
+            this.ateliersServ.getQRCode(result.text);
             // this.webViewSrc = result.text;
             alert({
                 title: "Vous scannez",

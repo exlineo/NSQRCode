@@ -47,7 +47,8 @@ export class ScanComponent implements OnInit {
             orientation: "landscape",     
             openSettingsIfPermissionWasPreviouslyDenied: true //ios only 
         }).then((result) => {
-            this.route.navigate(['/pageinfos']);
+            console.log(result.text, result.format);
+            this.ateliersServ.getQRCode(result.text);
             alert({
                 title: "Vous scannez",
                 message: "Format: " + result.format + ",\nContent: " + result.text,
