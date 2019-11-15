@@ -54,7 +54,7 @@ export class ParamsComponent implements OnInit {
             cancelButtonText: "Annuler",
             inputType: dialogs.inputType.text
         }).then(r => {
-            this.ateliersServ.setConfig();
+            this.ateliersServ.setConfig(r.text);
             console.log("Dialog result: " + r.result + ", text: " + r.text);
         });
     }
@@ -67,7 +67,7 @@ export class ParamsComponent implements OnInit {
             message: "Cliquez sur ACTIVER pour activer le débogage, ANNULER pour... annuler",
             okButtonText: "ACTIVER",
             cancelButtonText: "ANNULER"
-        }).then(function (result) {
+        }).then((result) => {
             if(result){
                 this.ateliersServ.debug = true;
             }else{

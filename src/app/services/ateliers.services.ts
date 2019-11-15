@@ -76,9 +76,10 @@ export class AteliersService {
                 console.log("Fichier local", res, res.length);
                 if(res.length > 0){
                     this.url = res;
+                    this.debugInfos("Lit config", "Url captée : "+this.url);
                     this.getAteliers();
                 }else{
-                    this.setConfig();
+                    this.debugInfos("Lit config", "Aucune URL n'a été trouvée, merci d'en paramétrer une");
                 }
             })
             .catch((err) => {
@@ -99,7 +100,9 @@ export class AteliersService {
      */
     getAteliers() {
         this.http.get(this.url + 'escapes/static/').subscribe(
-            data => {
+            (data) => {
+                this.debugInfos("Load datas ateliers", "Chargement des données des ateliers réussi");
+
                 this.ngZone.run(() => {
                     console.log(data['session']['duration']['manip']);
                     let manip_tmp: ManipI = { 'content': data['escape']['manip']['content'], 'gameover': data['escape']['manip']['gameover'] }
@@ -128,6 +131,8 @@ export class AteliersService {
     getQRCode(u: string) {
         this.http.get(u).subscribe(data => {
             console.log(data);
+            this.debugInfos("Données QRCode", "Données : "+data);
+
             this.qrcodeJson = data;
             console.log(this.qrcodeJson);
             this.route.navigate(['/pageinfos']);
