@@ -1,13 +1,10 @@
 import { Injectable, NgZone } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 
 import { SocketIO } from "nativescript-socketio";
 import { TimerService } from "./timer.service";
 import { AteliersService } from "./ateliers.services";
 
-import { servAdr } from "../interfaces/globalEnv";
 import { Router } from "@angular/router";
-import { SessionI } from "../interfaces/appi";
 
 @Injectable({
     providedIn: "root"

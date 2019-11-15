@@ -1,5 +1,4 @@
-<!-- <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="confServ.app.template.pageBackground" [color]="confServ.app.template.pageText"> -->
-
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="ateliersServ.atelier.template.pageBackground" [color]="ateliersServ.atelier.template.pageText">
     <GridLayout rows="auto, *, auto" columns="auto, *, auto">
         <Label [text]="ateliersServ.atelier.title" class="h3" row="0" col="0"></Label>
         <Label [text]="tServ.duree" class="h3" row="0" col="2"></Label>
@@ -7,4 +6,4 @@
         <!-- <Label [text]="ateliersServ.atelier.manip.content" colSpan="3" class="h3" row="2" col="0"></Label> -->
         <HtmlView html="{{ ateliersServ.atelier.manip.content }}" colSpan="3" class="h3" row="2" col="0"></HtmlView>
     </GridLayout>
-<!-- </Page> -->
+</Page>

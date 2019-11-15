@@ -7,7 +7,6 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 import { Router } from "@angular/router";
 
 import { AteliersService } from "../services/ateliers.services";
-import { AtelierI, AtelierC } from "../interfaces/appi";
 import { TimerService } from "../services/timer.service";
 
 @Component({
@@ -44,6 +43,9 @@ export class ParamsComponent implements OnInit {
             this.route.navigate(['/home']);
         }
     }
+    /**
+     * Modifier les settings pour paramétrer une nouvelle adresse d'accès aux données
+     */
     onTapSettings(){
         dialogs.prompt({
             title: "Paramètre réseau",
@@ -54,6 +56,25 @@ export class ParamsComponent implements OnInit {
         }).then(r => {
             this.ateliersServ.setConfig();
             console.log("Dialog result: " + r.result + ", text: " + r.text);
+        });
+    }
+    /**
+     * Modifier les settings pour paramétrer une nouvelle adresse d'accès aux données
+     */
+    onTapDebug(){
+        dialogs.confirm({
+            title: "Activer le débogage",
+            message: "Cliquez sur ACTIVER pour activer le débogage, ANNULER pour... annuler",
+            okButtonText: "ACTIVER",
+            cancelButtonText: "ANNULER"
+        }).then(function (result) {
+            if(result){
+                this.ateliersServ.debug = true;
+            }else{
+                this.ateliersServ.debug = false;
+            }
+            // result argument is boolean
+            console.log("Dialog result: " + result);
         });
     }
 }

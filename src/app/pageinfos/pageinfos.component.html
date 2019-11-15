@@ -1,5 +1,4 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true"
-    [backgroundColor]="ateliersServ.atelier.template.pageBackground" [color]="ateliersServ.atelier.template.pageText">
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true" [backgroundColor]="ateliersServ.atelier.template.pageBackground" [color]="ateliersServ.atelier.template.pageText">
 
     <GridLayout rows="auto, *" columns="auto, *, auto">
         <Label [text]="ateliersServ.atelier.title" class="h3" row="0" col="0"></Label>
@@ -7,7 +6,7 @@
 
         <GridLayout rows="auto, *, auto"  columns="auto, *, auto" colSpan="3" row="1" col="0">
             <Label [text]="ateliersServ.qrcodeJson.title" class="h1" row="0" col="0" colSpan="3"></Label>
-            <Image [src]="adr + ateliersServ.qrcodeJson.image" *ngIf="ateliersServ.qrcodeJson.image" row="1" col="0" colSpan="3" ></Image>
+            <Image [src]="ateliersServ.url + ateliersServ.qrcodeJson.image" *ngIf="ateliersServ.qrcodeJson.image" row="1" col="0" colSpan="3" ></Image>
             <Button text="&#xf029;" (tap)="onScan()" row="2" col="2" class="btn fapetit fas"></Button>
             <HtmlView [html]="ateliersServ.qrcodeJson.content" *ngIf="ateliersServ.qrcodeJson.content" class="h3" row="2" col="0" colSpan="2"></HtmlView>
         </GridLayout>

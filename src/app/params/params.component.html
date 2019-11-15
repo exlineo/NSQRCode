@@ -2,7 +2,7 @@
 <ActionBar>
     <StackLayout><Label text="Sélectionnez l'atelier à attacher" class="entete up"></Label></StackLayout>
 </ActionBar>
-<GridLayout rows="*, *, 200" backgroundColor="orangered">
+<GridLayout rows="50, *, 200" backgroundColor="orangered">
     <StackLayout row="1">
         <ListView [items]="ateliersServ.ateliers" (itemTap)="onItemTap($event)" class="list-group">
             <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
@@ -13,12 +13,13 @@
             </ng-template>
         </ListView>
     </StackLayout>
-    <GridLayout columns="*, 200" backgroundColor="orangered" row="2">
-        <StackLayout col="0" colSpan="3">
+    <GridLayout columns="150, *, 150" backgroundColor="orangered" row="2">
+        <StackLayout col="1">
             <Label [text]="'Atelier choisi : ' + ateliersServ.atelier.title" class="h2 up"></Label>
             <Button text="&#xf058;" (tap)="onTap($event)" class="btn fapetit far"></Button>
         </StackLayout>
-        <Button text="&#xf013;" col="1" (tap)="onTapSettings()" class="btn fapetit far"></Button>
+        <Button text="&#xf013;" col="2" (tap)="onTapSettings()" class="btn btnnu far fapetit"></Button>
+        <Button text="&#xf188;" col="0" (tap)="onTapDebug()" class="btn btnnu far fapetit"></Button>
     </GridLayout>
 </GridLayout>
 <!-- </Page> -->

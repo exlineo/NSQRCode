@@ -49,6 +49,10 @@ Page, ActionBar, ListView, .list-group, .list-group-item{
     background-color:#0b966c;
     android-elevation:4;
 }
+.btnnu{
+    background-color:none;
+    android-elevation:0;
+}
 .btngros {
     font-size: 18;
     color:white;
@@ -74,13 +78,11 @@ Page, ActionBar, ListView, .list-group, .list-group-item{
 /* AUWESOME FONT */
 .far {
     font-family: "FontAwesome"; 
-    /* font-family: "Font Awesome 5 Free", "fa-regular-400"; */
     font-weight: 400;
     font-size:140;
 }
 .fas {
     font-family: "FontAwesome"; 
-    /* font-family: "Font Awesome 5 Free", "fa-solid-900"; */
     font-weight: 900;
 }
 .fagros{

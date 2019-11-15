@@ -48,6 +48,14 @@ export class AtelierC implements AtelierI{
     duration:180;
     background:"";
     instructions:"";
+    template:{
+        logo:"res://logo";
+        backgroundImage:"res://background";
+        pageBackground:"orangered";
+        pageText:"white";
+        headerBackground:"#333";
+        headerText:"white";
+    }
 }
 
 export class DurationC implements DurationI{
