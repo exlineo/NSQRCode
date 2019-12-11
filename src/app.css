@@ -9,88 +9,109 @@ In many cases you may want to use the NativeScript core theme instead
 of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
-@import '~nativescript-theme-core/css/core.dark.css';
+
+@import '~nativescript-theme-core/css/core.dark.android.css';
 
 /*
 For example, the following CSS rule changes the font size of all UI
 components that have the btn class name.
 */
-Page, ActionBar, ListView, .list-group, .list-group-item{
-    background-color:black;
-    color:white;
-}
-.h1{
-    font-size:60;
-    margin:5;
-    text-align: center;
-}
-.h2{
-    font-size:36;
-    margin:5;
-    text-align: center;
-}
-.h3{
-    font-size:24;
-    margin:5;
-    text-align: center;
-}
-.h4{
-    font-size:18;
-    margin:5;
-    text-align: center;
-}
-.btn {
-    font-size: 18;
-    color:white;
-    padding:12 24;
-    height:100;
-    width:100;
-    border-radius:50;
-    background-color:#0b966c;
-    android-elevation:4;
-}
-.btnnu{
-    background-color:none;
-    android-elevation:0;
-}
-.btngros {
-    font-size: 18;
-    color:white;
-    padding:12 24;
-    height:300;
-    width:300;
-    border-radius:150;
-    background-color:#0b966c;
-    text-align: center;
-    android-elevation:4;
-}
-.ok{
-    width:75;
-    height:75;
-    background-color:green;
-    margin:5;
-}
-.up{
-    text-transform: uppercase;
-    text-align:center;
+
+Page,
+ActionBar,
+ListView,
+.list-group,
+.list-group-item {
+    background-color: black;
+    color: white;
 }
 
-/* AUWESOME FONT */
-.far {
-    font-family: "FontAwesome"; 
-    font-weight: 400;
-    font-size:140;
+.h1 {
+    font-size: 60;
+    margin: 5;
+    text-align: center;
 }
+
+.h2 {
+    font-size: 36;
+    margin: 5;
+    text-align: center;
+}
+
+.h3 {
+    font-size: 24;
+    margin: 5;
+    text-align: center;
+}
+
+.h4 {
+    font-size: 18;
+    margin: 5;
+    text-align: center;
+}
+
+.btn {
+    font-size: 18;
+    color: white;
+    padding: 12 24;
+    height: 100;
+    width: 100;
+    border-radius: 50;
+    background-color: #0b966c;
+    android-elevation: 4;
+}
+
+.btnnu {
+    background-color: none;
+    android-elevation: 0;
+}
+
+.btngros {
+    font-size: 18;
+    color: white;
+    padding: 12 24;
+    height: 300;
+    width: 300;
+    border-radius: 150;
+    background-color: #0b966c;
+    text-align: center;
+    android-elevation: 4;
+}
+
+.ok {
+    width: 75;
+    height: 75;
+    background-color: green;
+    margin: 5;
+}
+
+.up {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+/* AUWESOME FONT */
+
+.far {
+    font-family: "FontAwesome";
+    font-weight: 400;
+    font-size: 140;
+}
+
 .fas {
-    font-family: "FontAwesome"; 
+    font-family: "FontAwesome";
     font-weight: 900;
 }
-.fagros{
-    font-size:140;
+
+.fagros {
+    font-size: 140;
 }
-.famoyen{
-    font-size:110;
+
+.famoyen {
+    font-size: 110;
 }
-.fapetit{
-    font-size:60;
+
+.fapetit {
+    font-size: 60;
 }
