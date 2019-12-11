@@ -7,7 +7,6 @@ import { AppComponent } from "./app.component";
 import { BarcodeScanner } from 'nativescript-barcodescanner';
 
 import { AteliersService } from "./services/ateliers.services";
-import { SocketService } from "./services/socket.service";
 import { TimerService } from "./services/timer.service";
 
 import { SocketIOModule } from "nativescript-socketio/angular";
@@ -28,7 +27,6 @@ import { sock } from "./interfaces/globalEnv";
     ],
     providers:[
         AteliersService,
-        SocketService,
         TimerService,
         BarcodeScanner
     ],

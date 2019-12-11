@@ -6,9 +6,6 @@ import { Router } from "@angular/router";
 import { TimerService } from "../services/timer.service";
 import { AteliersService } from "../services/ateliers.services";
 
-import { SocketIO } from "nativescript-socketio";
-import { SocketService } from "../services/socket.service";
-
 @Component({
     selector: "home",
     templateUrl: "./home.component.html"
@@ -19,14 +16,11 @@ export class HomeComponent implements OnInit {
         private page:Page,
         private route:Router,
         public ateliersServ:AteliersService,
-        private tServ:TimerService,
-        private socketIO:SocketIO,
-        private socket:SocketService) {
+        private tServ:TimerService) {
     }
 
     ngOnInit(): void {
         this.page.actionBarHidden = true;
-        this.socket.conneSock();
         console.log("Home", this.ateliersServ.atelier);
     }
     
@@ -36,6 +30,5 @@ export class HomeComponent implements OnInit {
     }
     
     ngOnDestroy() {
-        this.socket.deconneSock();
     }
 }
